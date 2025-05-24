@@ -18,10 +18,9 @@ int main()
     std::cout << "Finding " << toFind << " in " << containerName << ":\n";
     printContainer( primes );
 
-    auto foundVector{ easyfind( primes, toFind ) };
+    auto foundInVector{ easyfind( primes, toFind ) };
 
-    printFound( primes, toFind, foundVector, containerName );
-    // foundVector = std::find( primes.begin(), primes.end(), toFind );
+    printFound( primes, toFind, foundInVector, containerName );
 
     std::cout << "----------------------------------" << '\n';
 
@@ -33,14 +32,26 @@ int main()
     std::cout << "Finding " << toFind << " in " << containerName << ":\n";
     printContainer( fortyTwo );
 
-    auto foundArray{ easyfind( fortyTwo, toFind ) };
+    auto foundInArray{ easyfind( fortyTwo, toFind ) };
 
-    printFound( fortyTwo, toFind, foundArray, containerName );
-    // foundArray = std::find( fortyTwo.begin(), fortyTwo.end(), toFind );
+    printFound( fortyTwo, toFind, foundInArray, containerName );
 
     std::cout << "----------------------------------" << '\n';
 
     // std::list
+    toFind = 89;
+    containerName.assign( "std::list fibonacci" );
+    std::list fibonacci{ 0, 1 };
+
+    while ( fibonacci.back() < 1000)
+        fibonacci.push_back(*(std::prev(fibonacci.end(), 1)) + *(std::prev(fibonacci.end(), 2)));
+
+    std::cout << "Finding " << toFind << " in " << containerName << ":\n";
+    printContainer( fibonacci );
+
+    auto foundInList{ easyfind( fibonacci, toFind ) };
+
+    printFound( fibonacci, toFind, foundInList, containerName );
 
     return 0;
 }

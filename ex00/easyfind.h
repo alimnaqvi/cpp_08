@@ -28,7 +28,7 @@ template <typename T>
 void printFound( T& container, const int toFind, typename T::const_iterator& found, std::string_view containerName )
 {
     if ( found != container.cend() )
-        std::cout << "Found " << *found << " at index " << found - container.cbegin() << ".\n";
+        std::cout << "Found " << *found << " at index " << std::distance( container.cbegin(), found ) << ".\n";
     else
         std::cout << toFind << " could not be found in " << containerName << ".\n";
 }
