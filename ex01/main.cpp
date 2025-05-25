@@ -138,31 +138,32 @@ int main()
     std::cout << "-------------------------" << '\n';
 
     // addRange boundary tests
-    std::cout << "addRange boundary tests:" << '\n';
+    std::cout << "addRange boundary and iterator type tests:" << '\n';
     try
     {
         Span a{ 100 };
 
-        // A vector of size 50 (all zeroes)
-        std::vector<int> vec1( 50 );
+        // A vector of size 50 (all ones)
+        std::vector<int> vec( 50 );
+        vec.assign( 50, 1 );
 
         // Add the entire vector to our Span
-        a.addRange( vec1.begin(), vec1.end() );
+        a.addRange( vec.begin(), vec.end() );
 
-        // A vector of size 50 (fill with twos)
-        std::vector<int> vec2( 50 );
-        vec2.assign( 50, 2 );
+        // An array of size 50 (fill with twos)
+        std::array<int, 50> arr;
+        arr.fill( 2 );
 
-        // Add the entire vector to our Span
-        a.addRange( vec2.begin(), vec2.end() );
+        // Add the entire array to our Span
+        a.addRange( arr.begin(), arr.end() );
 
         // Our span should now be at maximum capacity
         printSpanInfo( a );
 
         Span b{ 49 };
 
-        // Cannot add vec1 or vec2 since they are of size 50
-        b.addRange( vec2.begin(), vec2.end() );
+        // Cannot add vec or arr since they are of size 50
+        b.addRange( arr.begin(), arr.end() );
         printSpanInfo( b );
 
         std::cout << "This won't be reached since the above will throw an exception" << '\n';

@@ -44,34 +44,6 @@ void Span::addNumber( int i )
                               std::to_string( m_elements.capacity() ) );
 }
 
-void Span::addRange( std::vector<int>::iterator beginIt, std::vector<int>::iterator endIt )
-{
-    std::ptrdiff_t rangeSize{ std::distance( beginIt, endIt ) };
-    std::ptrdiff_t remainingCapacity = static_cast<std::ptrdiff_t>( m_elements.capacity() ) - m_elements.size();
-
-    if ( rangeSize > remainingCapacity )
-        throw NoMoreCapacity( "Cannot add the requested range of size " + std::to_string( rangeSize ) +
-                              " since it exceeds the object's remaining capacity of " +
-                              std::to_string( remainingCapacity ) );
-
-    for ( auto it{ beginIt }; it != endIt; ++it )
-        m_elements.push_back( *it );
-}
-
-void Span::addRange( std::vector<int>::const_iterator beginIt, std::vector<int>::const_iterator endIt )
-{
-    std::ptrdiff_t rangeSize{ std::distance( beginIt, endIt ) };
-    std::ptrdiff_t remainingCapacity = static_cast<std::ptrdiff_t>( m_elements.capacity() ) - m_elements.size();
-
-    if ( rangeSize > remainingCapacity )
-        throw NoMoreCapacity( "Cannot add the requested range of size " + std::to_string( rangeSize ) +
-                              " since it exceeds the object's remaining capacity of " +
-                              std::to_string( remainingCapacity ) );
-
-    for ( auto it{ beginIt }; it != endIt; ++it )
-        m_elements.push_back( *it );
-}
-
 unsigned int Span::shortestSpan() const
 {
     if ( m_elements.size() < 2 )

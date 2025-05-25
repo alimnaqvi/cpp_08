@@ -22,11 +22,12 @@ class Span
 
     // Main member functions
     void         addNumber( int i );
-    // ! Possibly make the below too templates T::iterator / T::const_iterator (so should work with std::array too)
-    void         addRange( std::vector<int>::iterator beginIt, std::vector<int>::iterator endIt );
-    void         addRange( std::vector<int>::const_iterator beginIt, std::vector<int>::const_iterator endIt );
     unsigned int shortestSpan() const;
     unsigned int longestSpan() const;
+
+    // Function template to add range
+    template <typename Iterator>
+    void addRange( Iterator beginIt, Iterator endIt );
 
     // Print elements and get size/capacity
     void        printElements() const;
@@ -58,5 +59,20 @@ class Span
   private:
     std::vector<int> m_elements;
 };
+
+template <typename Iterator>
+void Span::addRange( Iterator beginIt, Iterator endIt )
+{
+    std::ptrdiff_t rangeSize{ std::distance( beginIt, endIt ) };
+    std::ptrdiff_t remainingCapacity = static_cast<std::ptrdiff_t>( m_elements.capacity() ) - m_elements.size();
+
+    if ( rangeSize > remainingCapacity )
+        throw NoMoreCapacity( "Cannot add the requested range of size " + std::to_string( rangeSize ) +
+                              " since it exceeds the object's remaining capacity of " +
+                              std::to_string( remainingCapacity ) );
+
+    for ( auto it{ beginIt }; it != endIt; ++it )
+        m_elements.push_back( *it );
+}
 
 #endif /* SPAN_H */
