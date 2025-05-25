@@ -51,7 +51,8 @@ unsigned int Span::shortestSpan() const
 
     auto copyVec{ m_elements };
 
-    std::sort( copyVec.begin(), copyVec.end() );
+    if ( !std::is_sorted( copyVec.begin(), copyVec.end() ) )
+        std::sort( copyVec.begin(), copyVec.end() );
 
     unsigned int minSpan{ std::numeric_limits<unsigned int>::max() };
     unsigned int currentSpan{};
