@@ -103,11 +103,11 @@ void Span::printIndexRange( std::size_t first, std::size_t last ) const
     }
     std::cout << "{ ";
     if ( first > 0 )
-        std::cout << "* First " << first << " elements omitted * " << '\n';
+        std::cout << "[First " << first << " elements omitted] ";
     for ( auto i{ first }; i <= last; ++i )
         std::cout << m_elements[i] << ' ';
     if ( last > 0 && last < m_elements.size() - 1 )
-        std::cout << "* Last " << m_elements.size() - last - 1 << " elements omitted * " << '\n';
+        std::cout << "[Last " << m_elements.size() - last - 1 << " elements omitted] ";
     std::cout << "}\n";
 }
 
