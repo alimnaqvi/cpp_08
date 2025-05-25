@@ -44,7 +44,27 @@ void Span::addNumber( int i )
                               std::to_string( m_elements.capacity() ) );
 }
 
-unsigned int Span::shortestSpan()
+void Span::addRange( std::vector<int>::iterator beginIt, std::vector<int>::iterator endIt )
+{
+    if ( std::distance( beginIt, endIt - 1 ) > m_elements.capacity() - m_elements.size() )
+        throw NoMoreCapacity( "Cannot add the requested range since it will exceed the object's maximum capacity of " +
+                              std::to_string( m_elements.capacity() ) );
+
+    for ( auto it{ beginIt }; it != endIt; ++it )
+        m_elements.push_back( *it );
+}
+
+void Span::addRange( std::vector<int>::const_iterator beginIt, std::vector<int>::const_iterator endIt )
+{
+    if ( std::distance( beginIt, endIt - 1 ) > m_elements.capacity() - m_elements.size() )
+        throw NoMoreCapacity( "Cannot add the requested range since it will exceed the object's maximum capacity of " +
+                              std::to_string( m_elements.capacity() ) );
+
+    for ( auto it{ beginIt }; it != endIt; ++it )
+        m_elements.push_back( *it );
+}
+
+unsigned int Span::shortestSpan() const
 {
     if ( m_elements.size() < 2 )
         throw SpanNotApplicable( "Span cannot be calculated since there are fewer than 2 elements present" );
@@ -73,7 +93,7 @@ unsigned int Span::shortestSpan()
     return minSpan;
 }
 
-unsigned int Span::longestSpan()
+unsigned int Span::longestSpan() const
 {
     if ( m_elements.size() < 2 )
         throw SpanNotApplicable( "Span cannot be calculated since there are fewer than 2 elements present" );
@@ -82,6 +102,43 @@ unsigned int Span::longestSpan()
     long long maxVal{ *( std::max_element( m_elements.begin(), m_elements.end() ) ) };
 
     return ( maxVal - minVal );
+}
+
+// Print elements and get size/capacity
+
+void Span::printElements() const
+{
+    std::cout << "{ ";
+    for ( const auto& elem : m_elements )
+        std::cout << elem << ' ';
+    std::cout << "}\n";
+}
+
+void Span::printIndexRange( std::size_t first, std::size_t last ) const
+{
+    if ( first >= m_elements.size() || last >= m_elements.size() || first > last )
+    {
+        std::cout << "Invalid first/last index supplied." << '\n';
+        return;
+    }
+    std::cout << "{ ";
+    if ( first > 0 )
+        std::cout << "* First " << first << " elements omitted * " << '\n';
+    for ( auto i{ first }; i <= last; ++i )
+        std::cout << m_elements[i] << ' ';
+    if ( last > 0 && last < m_elements.size() - 1 )
+        std::cout << "* Last " << m_elements.size() - last - 1 << " elements omitted * " << '\n';
+    std::cout << "}\n";
+}
+
+std::size_t Span::size() const
+{
+    return m_elements.size();
+}
+
+std::size_t Span::capacity() const
+{
+    return m_elements.capacity();
 }
 
 // Exception classes constructor and what member definitions

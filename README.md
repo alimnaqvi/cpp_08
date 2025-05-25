@@ -13,4 +13,8 @@ Core concepts learned and applied:
   - Constant iterators
   - Standard library algorithms
 - Exercise 01: Span
-  - 
+  - Choosing the most efficient container for the problem situation
+  - std::vector resizing and capacity
+  - The unsigned length and subscript problem
+  - Coming up with an efficient algorithm for finding the shortest span
+  - Efficiency and performance considerations in loops (e.g., unnecessary bounds checking)
