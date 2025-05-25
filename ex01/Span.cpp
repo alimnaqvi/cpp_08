@@ -46,9 +46,13 @@ void Span::addNumber( int i )
 
 void Span::addRange( std::vector<int>::iterator beginIt, std::vector<int>::iterator endIt )
 {
-    if ( std::distance( beginIt, endIt - 1 ) > m_elements.capacity() - m_elements.size() )
-        throw NoMoreCapacity( "Cannot add the requested range since it will exceed the object's maximum capacity of " +
-                              std::to_string( m_elements.capacity() ) );
+    std::ptrdiff_t rangeSize{ std::distance( beginIt, endIt ) };
+    std::ptrdiff_t remainingCapacity = static_cast<std::ptrdiff_t>( m_elements.capacity() ) - m_elements.size();
+
+    if ( rangeSize > remainingCapacity )
+        throw NoMoreCapacity( "Cannot add the requested range of size " + std::to_string( rangeSize ) +
+                              " since it exceeds the object's remaining capacity of " +
+                              std::to_string( remainingCapacity ) );
 
     for ( auto it{ beginIt }; it != endIt; ++it )
         m_elements.push_back( *it );
@@ -56,9 +60,13 @@ void Span::addRange( std::vector<int>::iterator beginIt, std::vector<int>::itera
 
 void Span::addRange( std::vector<int>::const_iterator beginIt, std::vector<int>::const_iterator endIt )
 {
-    if ( std::distance( beginIt, endIt - 1 ) > m_elements.capacity() - m_elements.size() )
-        throw NoMoreCapacity( "Cannot add the requested range since it will exceed the object's maximum capacity of " +
-                              std::to_string( m_elements.capacity() ) );
+    std::ptrdiff_t rangeSize{ std::distance( beginIt, endIt ) };
+    std::ptrdiff_t remainingCapacity = static_cast<std::ptrdiff_t>( m_elements.capacity() ) - m_elements.size();
+
+    if ( rangeSize > remainingCapacity )
+        throw NoMoreCapacity( "Cannot add the requested range of size " + std::to_string( rangeSize ) +
+                              " since it exceeds the object's remaining capacity of " +
+                              std::to_string( remainingCapacity ) );
 
     for ( auto it{ beginIt }; it != endIt; ++it )
         m_elements.push_back( *it );

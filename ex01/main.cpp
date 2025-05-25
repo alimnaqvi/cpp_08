@@ -138,7 +138,41 @@ int main()
     std::cout << "-------------------------" << '\n';
 
     // addRange boundary tests
-    
+    std::cout << "addRange boundary tests:" << '\n';
+    try
+    {
+        Span a{ 100 };
+
+        // A vector of size 50 (all zeroes)
+        std::vector<int> vec1( 50 );
+
+        // Add the entire vector to our Span
+        a.addRange( vec1.begin(), vec1.end() );
+
+        // A vector of size 50 (fill with twos)
+        std::vector<int> vec2( 50 );
+        vec2.assign( 50, 2 );
+
+        // Add the entire vector to our Span
+        a.addRange( vec2.begin(), vec2.end() );
+
+        // Our span should now be at maximum capacity
+        printSpanInfo( a );
+
+        Span b{ 49 };
+
+        // Cannot add vec1 or vec2 since they are of size 50
+        b.addRange( vec2.begin(), vec2.end() );
+        printSpanInfo( b );
+
+        std::cout << "This won't be reached since the above will throw an exception" << '\n';
+    }
+    catch ( const std::exception& e )
+    {
+        std::cout << "An exception occurred: " << e.what() << '\n';
+    }
+    std::cout << "-------------------------" << '\n';
+
     // 10000 numbers
 
     // Test with longestSpan being UINT_MAX (because both INT_MAX and INT_MIN are elements)
