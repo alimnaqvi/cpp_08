@@ -75,4 +75,17 @@ void Span::addRange( Iterator beginIt, Iterator endIt )
         m_elements.push_back( *it );
 }
 
+template <typename Iterator>
+bool isReverseSorted( Iterator beginIt, Iterator endIt )
+{
+    if ( beginIt == endIt )
+        return false;
+    for ( auto it{ beginIt + 1 }; it != endIt; ++it )
+    {
+        if ( *it > *( it - 1 ) )
+            return false;
+    }
+    return true;
+}
+
 #endif /* SPAN_H */
