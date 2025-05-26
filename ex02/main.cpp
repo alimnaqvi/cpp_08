@@ -1,37 +1,121 @@
 #include "MutantStack.h"
+#include <deque>
+#include <iomanip>
 #include <iostream>
 #include <list>
 #include <stack>
+#include <string>
+#include <vector>
 
 int main()
 {
-    MutantStack<int> mstack;
+    // Simple stack of numbers
+    MutantStack<int> naturalNums;
 
-    mstack.push( 5 );
-    mstack.push( 17 );
+    // It starts empty
+    std::cout << "Is naturalNums stack empty: " << std::boolalpha << naturalNums.empty() << '\n';
 
-    std::cout << mstack.top() << std::endl;
+    // Add numbers 1-10 to the stack
+    for ( int i{ 1 }; i <= 10; ++i )
+        naturalNums.push( i );
 
-    mstack.pop();
+    // We can use range-based loops with MutantStack, unlike std::stack, because of iterators
+    std::cout << "naturalNums: ";
+    printContainer( naturalNums ); // Uses range-based loop
 
-    std::cout << mstack.size() << std::endl;
+    // The last number added (10) is always on the top of the stack
+    std::cout << "Top of naturalNums stack: " << naturalNums.top() << '\n';
 
-    mstack.push( 3 );
-    mstack.push( 5 );
-    mstack.push( 737 );
-    //[...]
-    mstack.push( 0 );
+    naturalNums.pop();
 
-    // MutantStack<int>::iterator it  = mstack.begin();
-    // MutantStack<int>::iterator ite = mstack.end();
+    // Removed last element so 9 should be on top now
+    std::cout << "Top of naturalNums stack after popping: " << naturalNums.top() << '\n';
 
-    // ++it;
-    // --it;
-    // while ( it != ite )
-    // {
-    //     std::cout << *it << std::endl;
-    //     ++it;
-    // }
-    std::stack<int> s( mstack );
+    // Another stack initialized with negative numbers (without using push())
+    MutantStack<int> negativeNums{ std::deque{ -1, -2, -3, -4, -5, -6, -7, -8, -9, -10 } };
+
+    std::cout << "negativeNums: ";
+    printContainer( negativeNums );
+
+    // MutantStack has all member functions of std::stack, such as swap()
+    std::cout << "Swapping contents of naturalNums and negativeNums using swap() member function of std::stack:"
+              << '\n';
+    naturalNums.swap( negativeNums );
+
+    std::cout << "naturalNums after swapping: ";
+    printContainer( naturalNums );
+    std::cout << "negativeNums after swapping: ";
+    printContainer( negativeNums );
+
+    std::cout << "-------------------------------------" << '\n';
+
+    // MutantStack, like std::stack, always has an underlying container type (default std::deque) which can be specified
+    MutantStack<std::string, std::list<std::string>> plates;
+
+    plates.push( "Big plate," );
+    plates.push( "Medium plate," );
+    plates.push( "Small plate" );
+
+    std::cout << "plates: ";
+    printContainer( plates );
+
+    std::cout << "Top of plates stack: " << plates.top() << '\n';
+    std::cout << "Number of plates: " << plates.size() << '\n';
+
+    std::cout << "-------------------------------------" << '\n';
+
+    // A stack can be initialized with a container that is same type as the stack's underlying type
+    const std::vector<double> vec {3.14, 9.8, 7, 2.7182818284, 0.000001};
+
+    // A const stack can be initialized with any value but cannot be altered later
+    const MutantStack<double, const std::vector<double>> constants {vec};
+
+    // Attempting to push or pop will result in a compile error due to const-ness
+    // constants.push(5.97);
+
+    std::cout << "constants: ";
+    printContainer(constants);
+
+    std::cout << "-------------------------------------" << '\n';
+
+    // Using algorithms that require iterators
+
+    // Stack copy tests
+
+    // Heap copy tests
+
     return 0;
 }
+
+// int main()
+// {
+//     MutantStack<int> mstack;
+
+//     mstack.push( 5 );
+//     mstack.push( 17 );
+
+//     std::cout << mstack.top() << std::endl;
+
+//     mstack.pop();
+
+//     std::cout << mstack.size() << std::endl;
+
+//     mstack.push( 3 );
+//     mstack.push( 5 );
+//     mstack.push( 737 );
+//     //[...]
+//     mstack.push( 0 );
+
+//     MutantStack<int>::iterator it  = mstack.begin();
+//     MutantStack<int>::iterator ite = mstack.end();
+
+//     ++it;
+//     --it;
+//     while ( it != ite )
+//     {
+//         std::cout << *it << std::endl;
+//         ++it;
+//     }
+//     std::stack<int> s( mstack );
+//     return 0;
+// }
