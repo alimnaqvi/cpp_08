@@ -17,4 +17,8 @@ Core concepts learned and applied:
   - std::vector resizing and capacity
   - The unsigned length and subscript problem
   - Coming up with an efficient algorithm for finding the shortest span
-  - Efficiency and performance considerations in loops (e.g., unnecessary bounds checking)
+  - Efficiency and performance considerations in loops (e.g., unnecessary bounds checking) and algorithms
+- Exercise 02: Mutated abomination
+  - Container adaptors
+  - Understanding std::list and std::stack
+  - Deepening understanding of iterators by implementing own iterators
