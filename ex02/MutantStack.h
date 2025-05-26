@@ -89,7 +89,7 @@ class MutantStack : public std::stack<T, Container>
     }
 };
 
-/* Helper function template to print all elements of a container (must be have iterator members like begin()) */
+/* Helper function template to print all elements of a container (must have iterator members like begin()) */
 template <typename T>
 void printContainer( T& container )
 {

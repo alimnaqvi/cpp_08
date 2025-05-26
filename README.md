@@ -20,5 +20,6 @@ Core concepts learned and applied:
   - Efficiency and performance considerations in loops (e.g., unnecessary bounds checking) and algorithms
 - Exercise 02: Mutated abomination
   - Container adaptors
-  - Understanding std::list and std::stack
-  - Deepening understanding of iterators by implementing own iterators
+  - Inheriting from STL containers
+  - Understanding std::stack and creating a superset of it
+  - Deepening understanding of iterators and related member functions by implementing own iterators
