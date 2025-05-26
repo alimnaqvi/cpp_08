@@ -1,4 +1,5 @@
 #include "MutantStack.h"
+#include <algorithm>
 #include <deque>
 #include <iomanip>
 #include <iostream>
@@ -6,6 +7,13 @@
 #include <stack>
 #include <string>
 #include <vector>
+
+void replaceWithBowl( std::string& str )
+{
+    auto pos{ str.find( "plate" ) };
+    if ( pos != std::string::npos )
+        str.replace( pos, 5, "bowl" );
+}
 
 int main()
 {
@@ -62,27 +70,42 @@ int main()
     std::cout << "Top of plates stack: " << plates.top() << '\n';
     std::cout << "Number of plates: " << plates.size() << '\n';
 
+    // We can use any algorithms that require iterators
+    std::for_each( plates.begin(), plates.end(), replaceWithBowl );
+
+    std::cout << "plates after using for_each with replaceWithBowl: ";
+    printContainer( plates );
+
     std::cout << "-------------------------------------" << '\n';
 
     // A stack can be initialized with a container that is same type as the stack's underlying type
-    const std::vector<double> vec {3.14, 9.8, 7, 2.7182818284, 0.000001};
+    const std::vector<double> vec{ 3.14, 9.8, 7, 2.7182818284, 0.000001 };
 
     // A const stack can be initialized with any value but cannot be altered later
-    const MutantStack<double, const std::vector<double>> constants {vec};
+    const MutantStack<double, const std::vector<double>> constants{ vec };
 
     // Attempting to push or pop will result in a compile error due to const-ness
     // constants.push(5.97);
 
     std::cout << "constants: ";
-    printContainer(constants);
+    printContainer( constants );
 
     std::cout << "-------------------------------------" << '\n';
 
-    // Using algorithms that require iterators
+    // All constructors and overloaded operators are inherited from the underlying container
 
-    // Stack copy tests
+    // Copy constructor
+    const MutantStack bowls{ plates }; // Let CTAD deduce the types (<std::string, std::list<std::string>>)
 
-    // Heap copy tests
+    std::cout << "bowls: ";
+    printContainer( bowls );
+
+    // Copy assignment operator also works as expected
+    MutantStack<std::string, std::list<std::string>> bowlsCopy;
+    bowlsCopy = bowls;
+
+    std::cout << "bowlsCopy: ";
+    printContainer( bowlsCopy );
 
     return 0;
 }
