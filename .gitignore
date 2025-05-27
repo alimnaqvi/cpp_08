@@ -7,6 +7,8 @@ rough*
 test
 .vscode
 .clang-format
+.DS_Store
+Dockerfile
 
 ex00
 ex01
