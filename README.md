@@ -23,3 +23,9 @@ Core concepts learned and applied:
   - Inheriting from STL containers
   - Understanding std::stack and creating a superset of it
   - Deepening understanding of iterators and related member functions by implementing own iterators
+
+## Learning Resources
+- [**Dynamic arrays: std::vector**](https://www.learncpp.com/cpp-tutorial/introduction-to-containers-and-arrays/) (go through the whole chapter)
+- [Iterators and their usage](https://www.studyplan.dev/pro-cpp/iterators)
+- [Introduction to standard library algorithms](https://www.learncpp.com/cpp-tutorial/introduction-to-standard-library-algorithms/)
+- [std::stack](https://cplusplus.com/reference/stack/stack/)
