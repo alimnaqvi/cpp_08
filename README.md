@@ -16,7 +16,7 @@ This project is part of the C++ modules at 42 School. This module is a deep dive
 *   **Exception Handling:** Using exceptions to signal errors, such as when an operation cannot be performed.
 
 ## Learning Resources
-- [**Dynamic arrays: std::vector**](https://www.learncpp.com/cpp-tutorial/introduction-to-containers-and-arrays/) (go through the whole chapter)
+- [**Chapter 16 - Dynamic arrays: std::vector**](https://www.learncpp.com/cpp-tutorial/introduction-to-containers-and-arrays/) (go through the whole chapter)
 - [Iterators and their usage](https://www.studyplan.dev/pro-cpp/iterators)
 - [Introduction to standard library algorithms](https://www.learncpp.com/cpp-tutorial/introduction-to-standard-library-algorithms/)
 - [std::stack](https://cplusplus.com/reference/stack/stack/)
