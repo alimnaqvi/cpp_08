@@ -3,7 +3,10 @@
 [![C++ Programming](https://img.shields.io/badge/Language-C++-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B)
 [![Makefile](https://img.shields.io/badge/Build-Make-brightgreen.svg)](https://www.gnu.org/software/make/)
 
-This project is part of the C++ modules at 42 School. This module is a deep dive into the C++ Standard Template Library (STL), focusing on templates, containers, iterators, and algorithms. The exercises are designed to build a strong understanding of how to use and even extend standard library components to solve various problems efficiently.
+<p>
+   This project is part of the C++ modules at 42 School. This module is a deep dive into the C++ Standard Template Library (STL), focusing on templates, containers, iterators, and algorithms. The exercises are designed to build a strong understanding of how to use and even extend standard library components to solve various problems efficiently.
+   <img src="https://page-views-counter-534232554413.europe-west1.run.app/view?src=github.com&src_uri=/alimnaqvi/cpp_08" style="display: none;" />
+</p>
 
 ## Core Concepts Covered
 
